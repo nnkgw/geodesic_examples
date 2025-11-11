@@ -20,7 +20,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(MSVC)
   add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
-  add_compile_options(/W4 /permissive- /wd4996 /Zc:strictStrings-)
+  add_compile_options(/W4 /permissive- /wd4996)
 else()
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
