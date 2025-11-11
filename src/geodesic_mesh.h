@@ -501,7 +501,7 @@ inline void fill_surface_point_structure(geodesic::SurfacePoint* point,
 
 inline void fill_surface_point_double(geodesic::SurfacePoint* point, 
 									  double* data, 
-									  long mesh_id)
+									  [[maybe_unused]] long mesh_id)
 {
 	data[0] = point->x();
 	data[1] = point->y();

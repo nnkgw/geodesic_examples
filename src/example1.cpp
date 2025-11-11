@@ -11,6 +11,7 @@
 
 int main(int argc, char **argv) 
 {
+	(void)argc; (void)argv;
 	std::vector<double> points;	
 	std::vector<unsigned> faces;
 	geodesic::read_mesh_from_file("hedgehog_mesh.txt",points,faces); 
