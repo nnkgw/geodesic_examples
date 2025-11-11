@@ -9,6 +9,7 @@
 #include <cmath>
 #include <assert.h>
 #include <set>
+#include <cstring>
 
 namespace geodesic{
 
