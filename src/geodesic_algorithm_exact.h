@@ -1365,8 +1365,8 @@ inline void GeodesicAlgorithmExact::print_statistics()
 	}
 	double intervals_per_edge = (double)interval_counter/(double)m_edge_interval_lists.size();
 
-	double memory = m_edge_interval_lists.size()*sizeof(IntervalList) + 
-					interval_counter*sizeof(Interval);
+	double memory = static_cast<double>(m_edge_interval_lists.size()) * sizeof(IntervalList) +
+			static_cast<double>(interval_counter) * sizeof(Interval);
 
 	std::cout << "uses about " << memory/1e6 << "Mb of memory" <<std::endl;
 	std::cout << interval_counter << " total intervals, or " 
