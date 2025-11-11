@@ -139,7 +139,7 @@ protected:
 	
 	unsigned node_indexx(edge_pointer e)
 	{
-		return e->id()*m_subdivision_level + m_mesh->vertices().size();
+		return e->id()*m_subdivision_level + static_cast<unsigned int>(m_mesh->vertices().size());
 	};
 
 private:
@@ -257,7 +257,7 @@ void GeodesicAlgorithmSubdivision::list_nodes_visible_from_node(node_pointer nod
 		assert(0);
 	}
 
-	unsigned index = distances.size();
+	unsigned index = static_cast<unsigned int>(distances.size());
 	distances.resize(storage.size());
 	for(; index<storage.size(); ++index)
 	{	

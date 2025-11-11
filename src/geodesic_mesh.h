@@ -113,9 +113,9 @@ template<class Points, class Faces>
 void Mesh::initialize_mesh_data(Points& p, Faces& tri)		//build mesh from regular point-triangle representation
 {
 	assert(p.size() % 3 == 0);
-	unsigned const num_vertices = p.size() / 3;
+	unsigned const num_vertices = static_cast<unsigned int>(p.size()) / 3;
 	assert(tri.size() % 3 == 0);
-	unsigned const num_faces = tri.size() / 3; 
+	unsigned const num_faces = static_cast<unsigned int>(tri.size()) / 3;
 
 	initialize_mesh_data(num_vertices, p, num_faces, tri);
 }

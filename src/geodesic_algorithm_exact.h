@@ -18,8 +18,8 @@ class GeodesicAlgorithmExact : public GeodesicAlgorithmBase
 public:
 	GeodesicAlgorithmExact(geodesic::Mesh* mesh):
 	  	GeodesicAlgorithmBase(mesh),
-		m_memory_allocator(mesh->edges().size(), mesh->edges().size()),
-		m_edge_interval_lists(mesh->edges().size())
+		m_memory_allocator(static_cast<unsigned int>(mesh->edges().size()), static_cast<unsigned int>(mesh->edges().size())),
+		m_edge_interval_lists(static_cast<unsigned int>(mesh->edges().size()))
 	{
 		m_type = EXACT;
 
