@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 
 	geodesic::GeodesicAlgorithmExact exact_algorithm(&mesh);		//exact algorithm
 	geodesic::GeodesicAlgorithmDijkstra dijkstra_algorithm(&mesh);		//simplest approximate algorithm: path only allowed on the edges of the mesh
-	unsigned const subdivision_level = 3;										//three additional vertices per every edge in subdivision algorithm
+	//unsigned const subdivision_level = 3;										//three additional vertices per every edge in subdivision algorithm
 	geodesic::GeodesicAlgorithmSubdivision subdivision_algorithm(&mesh,2);	//with subdivision_level=0 this algorithm becomes Dijkstra, with subdivision_level->infinity it becomes exact
 
 	std::vector<geodesic::GeodesicAlgorithmBase* > all_algorithms;		//for simplicity, store all possible geodesic algorithms here
