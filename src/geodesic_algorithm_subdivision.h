@@ -117,12 +117,12 @@ public:
 		m_nodes.reserve(m_mesh->vertices().size() + 
 						m_mesh->edges().size()*subdivision_level);
 
-		for(unsigned i=0; i<m_mesh->edges().size(); ++i)
+		for(unsigned edge_idx =0; edge_idx <m_mesh->edges().size(); ++edge_idx)
 		{
-			edge_pointer e = &m_mesh->edges()[i];
-			for(unsigned i=0; i<subdivision_level; ++i)
+			edge_pointer e = &m_mesh->edges()[edge_idx];
+			for(unsigned sub_idx =0; sub_idx <subdivision_level; ++sub_idx)
 			{
-				double offset = (double)(i+1)/(double)(subdivision_level+1);
+				double offset = (double)(sub_idx +1)/(double)(subdivision_level+1);
 				m_nodes.push_back(Node(e, offset));
 			}
 		}

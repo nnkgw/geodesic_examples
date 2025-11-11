@@ -253,7 +253,7 @@ inline long GeodesicAlgorithmExact::visible_from_source(SurfacePoint& point)	//n
 	return 0;
 }
 
-inline double GeodesicAlgorithmExact::compute_positive_intersection(double start,
+inline double GeodesicAlgorithmExact::compute_positive_intersection(double x_start,
 																	double pseudo_x,
 																	double pseudo_y,
 																	double sin_alpha,
@@ -261,13 +261,13 @@ inline double GeodesicAlgorithmExact::compute_positive_intersection(double start
 {
 	assert(pseudo_y < 0);
 
-	double denominator = sin_alpha*(pseudo_x - start) - cos_alpha*pseudo_y;
+	double denominator = sin_alpha*(pseudo_x - x_start) - cos_alpha*pseudo_y;
 	if(denominator<0.0)
 	{
 		return -1.0;
 	}
 
-	double numerator = -pseudo_y*start;
+	double numerator = -pseudo_y* x_start;
 
 	if(numerator < 1e-30)
 	{
@@ -536,7 +536,7 @@ inline void GeodesicAlgorithmExact::propagate(std::vector<SurfacePoint>& sources
 	set_sources(sources);
 	initialize_propagation_data();
 
-	clock_t start = clock();
+	clock_t start_time = clock();
 
 	unsigned satisfied_index = 0;
 
@@ -660,8 +660,8 @@ inline void GeodesicAlgorithmExact::propagate(std::vector<SurfacePoint>& sources
 	} 
 
 	m_propagation_distance_stopped = m_queue.empty() ? GEODESIC_INF : (*m_queue.begin())->min();
-	clock_t stop = clock();
-	m_time_consumed = (static_cast<double>(stop)-static_cast<double>(start))/CLOCKS_PER_SEC;
+	clock_t stop_time = clock();
+	m_time_consumed = (static_cast<double>(stop_time)-static_cast<double>(start_time))/CLOCKS_PER_SEC;
 
 /*	for(unsigned i=0; i<m_edge_interval_lists.size(); ++i)
 	{
@@ -1073,20 +1073,20 @@ inline void GeodesicAlgorithmExact::construct_propagated_intervals(bool invert,
 		//kill very small intervals in order to avoid precision problems
 	if(num_candidates == 2)		
 	{
-		double start = std::min(candidates->start(), (candidates+1)->start());
-		double stop = std::max(candidates->stop(), (candidates+1)->stop());
+		double merged_start = std::min(candidates->start(), (candidates+1)->start());
+		double merged_stop = std::max(candidates->stop(), (candidates+1)->stop());
 		if(candidates->stop()-candidates->start() < local_epsilon) // kill interval 0
 		{
 			*candidates = *(candidates+1);
 			num_candidates = 1;
-			candidates->start() = start;
-			candidates->stop() = stop;
+			candidates->start() = merged_start;
+			candidates->stop() = merged_stop;
 		}
 		else if ((candidates+1)->stop() - (candidates+1)->start() < local_epsilon)
 		{
 			num_candidates = 1;
-			candidates->start() = start;
-			candidates->stop() = stop;
+			candidates->start() = merged_start;
+			candidates->stop() = merged_stop;
 		}
 	}
 
@@ -1156,9 +1156,9 @@ inline void GeodesicAlgorithmExact::construct_propagated_intervals(bool invert,
 			double length = edge_length;
 			p->pseudo_x() = length - p->pseudo_x();
 
-			double start = length - p->stop();
+			double segment_start = length - p->stop();
 			p->stop() = length - p->start();
-			p->start() = start;
+			p->start() = segment_start;
 
 			p->min() = 0;
 

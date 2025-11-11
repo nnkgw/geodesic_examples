@@ -316,10 +316,10 @@ inline void Mesh::build_adjacencies()
 		double sum = 0;
 		for(unsigned j=0; j<3; ++j)		//compute angle adjacent to the vertex j
 		{
-			for(unsigned k=0; k<3; ++k)
+			for(unsigned kk=0; kk<3; ++kk)
 			{
-				vertex_pointer v = f.adjacent_vertices()[(j + k)%3];
-				abc[k] = f.opposite_edge(v)->length();
+				vertex_pointer v = f.adjacent_vertices()[(j + kk)%3];
+				abc[kk] = f.opposite_edge(v)->length();
 			}
 
 			double angle = angle_from_edges(abc[0], abc[1], abc[2]);
